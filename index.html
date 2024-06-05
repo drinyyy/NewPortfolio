@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    
+    <div class="experience">
+      <canvas class="experience-canvas"></canvas>
+    </div>
+
+    
+
+    <div id="menu">
+      <div id="about-menu-item" class="menu-item">About</div>
+      <div id="works-menu-item" class="menu-item">Works</div>
+      <div id="contact-menu-item" class="menu-item">Contact</div>
+    </div>
+
+
+
+    <!-- <div class="intro" id="intro">
+      <h1>Hello There . . .</h1>
+      <p>I'm Drin Lajci, but feel free to call me Drin.<br><br> As a 3D Front End Developer, I craft engaging digital experiences with a blend of modern aesthetics.</p>
+      <a href="#about" id="cta-button">More About Me</a>
+    </div>
+     -->
+
+
+
+    <div class="about-text1" id="intro1">
+      <p>
+        <span class="big1-1"  id="intro1-1">This is ME</span>
+        <span class="normal1-1" id="intro1-2">working and maybe, just maybe listening to some MUSIC</span>
+        <span class="big1-2" id="intro1-3">if i'm working ehrmm i'm probably working something related to 3D and website stuff</span>
+        <span class="normal1-2" id="intro1-4">Blending websites with 3D for a more interactive and immersive experience...</span>
+      </p>
+    </div>
+
+    <div class="about-text2" id="intro2">
+      <p>
+        <span class="big2-1"  id="intro2-1">We all start somewhere</span>
+        <span class="normal2-1" id="intro2-2">For me, the journey into 3D began when I was young, watching "Toy Story."</span>
+        <span class="big2-2" id="intro2-3">The magic of brining characters and stories to life for everybody, led me here</span>
+        <span class="normal2-2" id="intro2-4">Eventually my movie taste changed so did my visions.</span>
+      </p>
+    </div>
+
+
+    <div class="about-text3" id="intro3">
+      <p>
+        <span class="big3-1"  id="intro3-1">Reflecting on the Journey</span>
+        <span class="normal3-1" id="intro3-2">I often find myself reflecting on my journey of 3D and web. From the early days of being captivated by numerous things to diving deep into the technical challenges and creative joys <br></span>
+        <span class="big3-2" id="intro3-3">Moments of pause and contemplation</span>
+        <span class="normal3-2" id="intro3-4">A reminder of how far we've come and how much more there is to explore. Each view outside is a new perspective, just like each project brings new challenges and opportunities.</span>
+      </p>
+    </div>
+
+    <div class="about-text4" id="intro4">
+      <p>
+        <span class="big4-1"  id="intro4-1">Tale of Two Paths</span>
+        <span class="normal4-1" id="intro4-2">I've often found myself walking two parallel paths. The challenges and struggles I've faced, the moments of doubt and the nights spent. It's a reminder of the perseverance required to push through the tough times.<br></span>
+        <span class="big4-2" id="intro4-3">The triumphs</span>
+        <span class="normal4-2" id="intro4-4">The moments of clarity where everything falls into place. It's the joy of seeing an idea come to life, the satisfaction of solving a complex problem, and the excitement of endless possibilities.</span>
+        <span class="normal4-3" id="intro4-5">Together, these tell the story of my growth, balancing the ups and downs, and embracing both the light and the dark moments that shape us.</span>
+      </p>
+    </div>
+
+  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+ 
+    
+    <script type="module" src="/main.js"></script>
+
+   
+
+  <script>
+    
+    // GSAP animation for the menu items using fromTo()
+    gsap.fromTo(".menu-item", {
+        opacity: 0,
+        y: -200
+    }, {
+        duration: 1, // Duration of the animation for each menu item
+        opacity: 1, // Animate to full opacity
+        y: 0, // Move to their final position
+        stagger: 0.35, // Stagger the start of each menu item's animation by 0.1 seconds
+        ease: "power2.out" // Use an easing function for a smooth transition
+    });
+
+    // gsap.fromTo(".intro", {
+    //     opacity: 0,
+    //     x: -100
+    // }, {
+    //     duration: 2, // Duration of the animation for each menu item
+    //     opacity: 1, // Animate to full opacity
+    //     x: 0, // Move to their final position
+    //     stagger: 0.35, // Stagger the start of each menu item's animation by 0.1 seconds
+    //     ease: "power2.out" // Use an easing function for a smooth transition
+    // });
+
+    
+
+  </script>
+  </body>
+</html>
