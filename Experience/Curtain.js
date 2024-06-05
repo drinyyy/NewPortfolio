@@ -15,7 +15,7 @@ export default class Curtain {
     }
 
     setModel() {
-        // Apply the texture to each mesh (if any specific textures are needed)
+       
         this.actualCurtain.traverse((child) => {
             if (child.isMesh) {
                 
@@ -33,7 +33,7 @@ export default class Curtain {
             }
         });
 
-        // Adjust the curtain's scale and position, then add it to the scene
+        
         this.actualCurtain.scale.set(1, 2, 1);
         this.actualCurtain.position.set(0.009, -5, -8);
         this.scene.add(this.actualCurtain);
@@ -52,16 +52,16 @@ console.log(this.actualCurtain)
         this.mixer = new THREE.AnimationMixer(this.actualCurtain);
         this.firstAnimation = this.mixer.clipAction(this.curtain.animations[0]);
     
-        // Configure the animation to play only once
+        
         this.firstAnimation.setLoop(THREE.LoopOnce);
-        this.firstAnimation.clampWhenFinished = true; // Optionally clamp when finished to avoid jumping to start
+        this.firstAnimation.clampWhenFinished = true; 
     
         this.firstAnimation.play();
     }
     
 
     resize() {
-        // Handle resize logic here
+        
     }
 
     update() {

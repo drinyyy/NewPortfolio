@@ -6,7 +6,7 @@ export default class LightControls {
     this.scene = scene;
     this.resources = this.experience.resources;
     this.time = this.experience.time;
-    this.isAnimating = false; // Add this line
+    this.isAnimating = false; 
     this.starPositions = [
       new THREE.Vector3(1, 15, 3),
       new THREE.Vector3(2, 5, 5),
@@ -96,7 +96,7 @@ export default class LightControls {
         pointLight.shadow.camera.far = 20;
      pointLight.shadow.mapSize.set(2048, 2048);
     pointLight.shadow.normalBias = 0.1;
-    pointLight.position.copy(startingStar); // Set the light position to the starting star position
+    pointLight.position.copy(startingStar); 
     this.scene.add(pointLight);
     this.pointLights.push({ index: startingStarIndex, light: pointLight });
   }
@@ -242,16 +242,16 @@ export default class LightControls {
       let t = tValuesObject[index] + deltaTime;
       if (t > 1) t = 1;
       
-      // Use GSAP to animate the star along the curve smoothly
+      
       gsap.to(tValuesObject, {
         [index]: t,
         duration: deltaTime,
-        ease: "power1.inOut", // You can adjust the easing for a smoother effect
+        ease: "power1.inOut", 
         onUpdate: () => {
           let point = curve.getPointAt(tValuesObject[index]);
           star.position.set(point.x, point.y, point.z);
           
-          // Update the position of the point light if the star is one of the starting stars
+          
           const lightObject = this.pointLights.find(lightObj => lightObj.index === index);
           if (lightObject) {
             lightObject.light.position.set(point.x, point.y, point.z);
@@ -264,31 +264,30 @@ export default class LightControls {
 
   changeStarColor(star) {
     const currentColor = star.material.color.getHex();
-    const targetColor = (currentColor === 0xffffff) ? 0x2b2a30 : 0xffffff; // Toggle between white and grey
+    const targetColor = (currentColor === 0xffffff) ? 0x2b2a30 : 0xffffff;
     const targetColorObject = new THREE.Color(targetColor);
   
     gsap.to(star.material.color, {
       r: targetColorObject.r,
       g: targetColorObject.g,
       b: targetColorObject.b,
-      duration: 0.25, // Duration of the transition in seconds
+      duration: 0.25, 
       ease: "power1.inOut"
     });
   }
   
   update() {
     if (!this.isAnimating) {
-      return; // Skip the update if animation is not enabled
+      return; 
     }
-    const deltaTime = this.time.delta * 0.00035; // Convert to seconds
+    const deltaTime = this.time.delta * 0.00035; 
   
-    // Animate the position of the stars
+    
     this.animateStars(deltaTime, this.animatedStars, this.tValues, this.curve);
     this.animateStars(deltaTime, this.secondAnimatedStars, this.secondTValues, this.secondCurve);
     this.animateStars(deltaTime, this.thirdAnimatedStars, this.thirdTValues, this.thirdCurve);
     this.animateStars(deltaTime, this.fourthAnimatedStars, this.fourthTValues, this.fourthCurve);
   
-    // Update blinking for each non-animated star
     this.scene.children.forEach(child => {
       if (child.userData.blinkTimer !== undefined && !this.isStarAnimated(child)) {
         child.userData.blinkTimer -= deltaTime;
@@ -300,7 +299,7 @@ export default class LightControls {
     });
   }
   
-  // Helper function to check if a star is part of any animated stars array
+ 
   isStarAnimated(star) {
     const allAnimatedStars = [
       ...this.animatedStars,

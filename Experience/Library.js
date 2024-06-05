@@ -51,10 +51,10 @@ export default class Library {
         const center = boundingBox.getCenter(new THREE.Vector3());
         this.actualLibrary.position.set(-center.x, -center.y, -center.z);
 
-        // Add the actualLibrary to the pivot
+    
         this.pivot.add(this.actualLibrary);
 
-        // Position the pivot
+        
         this.pivot.position.set(5, -0.18, -4.3);
         this.pivot.scale.set(1, 2.24, 1.2);
         
@@ -72,8 +72,8 @@ export default class Library {
     update(){
         const targetPosition = new THREE.Vector3(50, 0.07, -5.5);
         if (this.camera.orthographicCamera.position.equals(targetPosition)) {
-            // Rotate the pivot object slowly on the y-axis
-            this.pivot.rotation.y += 0.0015; // Adjust the rotation speed as needed
+            
+            this.pivot.rotation.y += 0.0015; 
         }
     }
 }

@@ -47,7 +47,7 @@ export default class carpetGame {
         this.actualCarpet.scale.set(1,2,0.9);
         this.actualCarpet.position.set(1,-5,-7.5);
         this.scene.add(this.actualCarpet)
-        // Add the actualLibrary to the pivot
+        
     
         
     }
@@ -57,7 +57,7 @@ export default class carpetGame {
     setAnimation() {
         this.mixer = new THREE.AnimationMixer(this.actualCarpet);
 
-        // Assuming your carpet model contains animations and the first animation is the one you want to play
+        
         const clip = this.carpet.animations[0];
 
         this.action = this.mixer.clipAction(clip);
@@ -67,7 +67,7 @@ export default class carpetGame {
     resize() {}
 
     update() {
-        const delta = this.time.delta * 0.001; // assuming time.delta is in milliseconds
+        const delta = this.time.delta * 0.001; 
         if (this.mixer) this.mixer.update(delta);
     }
 }

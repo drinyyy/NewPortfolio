@@ -76,7 +76,7 @@ export default class Rooms {
         const update = () => {
             const cameraPosition = this.camera.orthographicCamera.position;
     
-            // Check if the camera position is exactly at the targetPosition
+            
             if (cameraPosition.equals(targetPosition)) {
                 // Animate to pulsing effect
                 gsap.to(targetColor, {
@@ -89,7 +89,7 @@ export default class Rooms {
                     }
                 });
             } else {
-                // Animate to a static color smoothly transitioning
+                
                 gsap.to(targetColor, {
                     emissive: 0xdedede,
                     intensity: 1,

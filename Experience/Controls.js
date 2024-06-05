@@ -10,17 +10,17 @@ export default class Controls {
         this.resources = this.experience.resources;
         this.time = this.experience.time;
 
-        this.cameraPosition = new THREE.Vector3(); // To store the camera position
+        this.cameraPosition = new THREE.Vector3(); 
     }
 
     trackCameraPosition() {
-        // Store the current position of the orthographic camera
+        
         this.cameraPosition.copy(this.camera.orthographicCamera.position);
     }
 
     getCameraPosition() {
-        // Return the current stored camera position
-        return this.cameraPosition.clone(); // Return a copy to prevent external modifications
+        
+        return this.cameraPosition.clone(); 
     }
 
     intro1() {
@@ -35,21 +35,21 @@ export default class Controls {
         ];
     
         
-        // Function to reset element styles
+        
         const resetElementStyles = () => {
             elements.forEach(element => {
                 const el = document.getElementById(element.id);
                 if (el) {
-                    gsap.killTweensOf(el); // Kill any ongoing animations
+                    gsap.killTweensOf(el); 
                     el.style.opacity = 0;
                     el.style.visibility = 'hidden';
                     el.style.pointerEvents = 'none';
-                    el.style.display = 'block'; // Ensure display is block for fading out
+                    el.style.display = 'block'; 
                 }
             });
         };
     
-        // Function to animate elements
+       
         const animateElement = (element, delay, display) => {
             const el = document.getElementById(element.id);
             if (el) {
@@ -84,12 +84,12 @@ export default class Controls {
             }
         };
     
-        // Reset styles when camera position changes
+        
         if (!this.cameraPosition.equals(targetPosition)) {
             resetElementStyles();
         }
     
-        // Iterate over elements and animate them
+        
         elements.forEach(element => {
             animateElement(element, element.delay, element.display);
         });
@@ -98,10 +98,10 @@ export default class Controls {
 
 
     intro2() {
-        // Desired position
+       
         const targetPosition = new THREE.Vector3(10, 15.63, -6.5);
 
-        // Elements and their corresponding delays
+        
         const elements = [
             { id: 'intro2', delay: 0.3, display: true },
             { id: 'intro2-1', delay: 0.6, display: false },
@@ -124,7 +124,6 @@ export default class Controls {
             });
         };
     
-        // Function to animate elements
         const animateElement = (element, delay, display) => {
             const el = document.getElementById(element.id);
             if (el) {
@@ -159,12 +158,10 @@ export default class Controls {
             }
         };
     
-        // Reset styles when camera position changes
         if (!this.cameraPosition.equals(targetPosition)) {
             resetElementStyles();
         }
     
-        // Iterate over elements and animate them
         elements.forEach(element => {
             animateElement(element, element.delay, element.display);
         });
@@ -172,10 +169,8 @@ export default class Controls {
 
 
     intro3() {
-        // Desired position
         const targetPosition = new THREE.Vector3(10, 10.85, -1);
     
-        // Elements and their corresponding delays
         const elements = [
             { id: 'intro3', delay: 0.3, display: true },
             { id: 'intro3-1', delay: 0.6, display: false },
@@ -184,21 +179,20 @@ export default class Controls {
             { id: 'intro3-4', delay: 7, display: false },
         ];
     
-        // Function to reset element styles
         const resetElementStyles = () => {
             elements.forEach(element => {
                 const el = document.getElementById(element.id);
                 if (el) {
-                    gsap.killTweensOf(el); // Kill any ongoing animations
+                    gsap.killTweensOf(el); 
                     el.style.opacity = 0;
                     el.style.visibility = 'hidden';
                     el.style.pointerEvents = 'none';
-                    el.style.display = 'block'; // Ensure display is block for fading out
+                    el.style.display = 'block'; 
                 }
             });
         };
     
-        // Function to animate elements
+
         const animateElement = (element, delay, display) => {
             const el = document.getElementById(element.id);
             if (el) {
@@ -233,12 +227,12 @@ export default class Controls {
             }
         };
     
-        // Reset styles when camera position changes
+ 
         if (!this.cameraPosition.equals(targetPosition)) {
             resetElementStyles();
         }
     
-        // Iterate over elements and animate them
+ 
         elements.forEach(element => {
             animateElement(element, element.delay, element.display);
         });
@@ -247,10 +241,10 @@ export default class Controls {
 
 
     intro4() {
-        // Desired position
+
         const targetPosition = new THREE.Vector3(10, 6.07, -6.5);
     
-        // Elements and their corresponding delays
+
         const elements = [
             { id: 'intro4', delay: 0.3, display: true },
             { id: 'intro4-1', delay: 0.6, display: false },
@@ -260,21 +254,21 @@ export default class Controls {
             { id: 'intro4-5', delay: 9, display: false },
         ];
     
-        // Function to reset element styles
+
         const resetElementStyles = () => {
             elements.forEach(element => {
                 const el = document.getElementById(element.id);
                 if (el) {
-                    gsap.killTweensOf(el); // Kill any ongoing animations
+                    gsap.killTweensOf(el); 
                     el.style.opacity = 0;
                     el.style.visibility = 'hidden';
                     el.style.pointerEvents = 'none';
-                    el.style.display = 'block'; // Ensure display is block for fading out
+                    el.style.display = 'block'; 
                 }
             });
         };
     
-        // Function to animate elements
+   
         const animateElement = (element, delay, display) => {
             const el = document.getElementById(element.id);
             if (el) {
@@ -309,23 +303,23 @@ export default class Controls {
             }
         };
     
-        // Reset styles when camera position changes
+        
         if (!this.cameraPosition.equals(targetPosition)) {
             resetElementStyles();
         }
     
-        // Iterate over elements and animate them
+        
         elements.forEach(element => {
             animateElement(element, element.delay, element.display);
         });
     }
 
     resize() {
-        // Any resize logic if needed
+        
     }
     
     update() {
-        // Call the method to track camera position in each update
+       
         this.trackCameraPosition();
         this.intro1();
         this.intro2();

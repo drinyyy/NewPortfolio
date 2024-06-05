@@ -23,7 +23,7 @@ export default class Extras {
     setModel5() {
         this.actualExtras.traverse((child) => {
             if (child.isMesh) {
-                // Custom behavior for each mesh
+                
             }
             if (child.name === 'Handrail002') {
                 child.material = new THREE.MeshBasicMaterial({ color: 0xEEDC82 });
@@ -39,8 +39,8 @@ export default class Extras {
     setModel6() {
         this.actualExtras2.traverse((child) => {
             if (child.isMesh) {
-                child.material.transparent = true; // Ensure material is transparent
-                child.material.opacity = 0; // Start with fully transparent
+                child.material.transparent = true; 
+                child.material.opacity = 0; 
             }
         });
     
@@ -48,42 +48,42 @@ export default class Extras {
         this.actualExtras2.position.set(0, -4.9, -7.75);
         this.scene.add(this.actualExtras2);
     
-        // Call the update method every frame
+      
         this.updateModelOpacity();
     }
     
     updateModelOpacity() {
-        // Desired camera position
+        
         const targetPosition = new THREE.Vector3(50, 12, -3.5);
     
-        // Check the camera position every frame
+        
         const checkCameraPosition = () => {
             const currentPosition = this.camera.orthographicCamera.position;
     
-            // Check if the camera is at the desired position
+            
             if (currentPosition.equals(targetPosition)) {
                 this.actualExtras2.traverse((child) => {
                     if (child.isMesh) {
-                        // Use GSAP to animate the opacity to 1
+                        
                         gsap.to(child.material, {
                             opacity: 1,
                             duration: 3, // Duration in seconds
-                            ease: "power2.inOut" // Easing function
+                            ease: "power2.inOut"
                         });
                     }
                 });
             } else {
-                // Request the next frame to continue checking
+                
                 requestAnimationFrame(checkCameraPosition);
             }
         };
     
-        // Start checking the camera position
+       
         checkCameraPosition();
     }
     
     setAnimation() {
-        // Implement any animations here
+       
     }
     
     
