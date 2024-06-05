@@ -47,7 +47,7 @@ export default class Teddy {
 
     setClickableAnimation(material) {
         const clock = new THREE.Clock();
-        const targetPosition = new THREE.Vector3(50, 0.07, -5.5); // Set the target position
+        const targetPosition = new THREE.Vector3(50, 0.07, -5.5); 
     
         const update = () => {
             if (this.camera.orthographicCamera.position.equals(targetPosition)) {

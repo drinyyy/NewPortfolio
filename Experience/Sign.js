@@ -39,7 +39,7 @@ export default class Sign {
     
     
     setAnimation() {
-        // Implement any animations here
+        
     }
     
     
