@@ -12,6 +12,10 @@ export default class Renderer{
         
 
         this.setRenderer();
+        
+        this.sizes.on('resize', () => {
+            this.resize();
+        });
     }
     setRenderer(){
         this.renderer = new THREE.WebGLRenderer({

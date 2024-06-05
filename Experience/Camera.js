@@ -15,6 +15,9 @@ export default class Camera {
         this.createInvisibleCubes();
         this.attachMenuEventListeners();
         
+        this.sizes.on('resize', () => {
+            this.resize();
+        });
     }
 
     createOrthographicCamera() {
@@ -29,10 +32,9 @@ export default class Camera {
         this.orthographicCamera.position.set(20, 12, -3);
         this.orthographicCamera.rotation.set(Math.PI, Math.PI / 2, -Math.PI);
         this.scene.add(this.orthographicCamera);
-        console.log("this is initial width",this.sizes.width)
-        console.log("this is initialheight",this.sizes.height)
-        console.log("sizes aspect",this.sizes.aspect)
-        console.log("sizes frustrum",this.sizes.frustrum)
+
+        console.log('Initial Camera Properties:', this.orthographicCamera);
+        console.log('Initial Sizes:', this.sizes);
     }
 
     
@@ -42,33 +44,36 @@ export default class Camera {
         const cubeGeometry = new THREE.BoxGeometry(1, 3, 1.5);
         const invisibleMaterial = new THREE.MeshBasicMaterial({ visible: false });
 
-        const cubeSettings = [
-            {
-                position: new THREE.Vector3(4, 16, -2.5),
-                cameraPosition: new THREE.Vector3(10, 15.63, -1),
-                frustum: { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
-            },
-            {
-                position: new THREE.Vector3(4, 16, -5.1),
-                cameraPosition: new THREE.Vector3(10, 15.63, -6.5),
-                frustum: { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
-            },
-            {
-                position: new THREE.Vector3(4, 16, -2.5),
-                cameraPosition: new THREE.Vector3(10, 15.5, -1),
-                frustum: { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
-            },
-            {
-                position: new THREE.Vector3(4, 11, -2.2),
-                cameraPosition: new THREE.Vector3(10, 10.85, -1),
-                frustum: { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
-            },
-            {
-                position: new THREE.Vector3(4, 6.2, -5),
-                cameraPosition: new THREE.Vector3(10, 6.07, -6.5),
-                frustum: { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
-            },
-        ];
+        const aspect = this.sizes.width / this.sizes.height;
+        const viewSize = this.sizes.frustrum;
+    
+    const cubeSettings = [
+        {
+            position: new THREE.Vector3(4, 16, -2.5),
+            cameraPosition: new THREE.Vector3(10, 15.63, -1),
+            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
+        },
+        {
+            position: new THREE.Vector3(4, 16, -5.1),
+            cameraPosition: new THREE.Vector3(10, 15.63, -6.5),
+            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
+        },
+        {
+            position: new THREE.Vector3(4, 16, -2.5),
+            cameraPosition: new THREE.Vector3(10, 15.5, -1),
+            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
+        },
+        {
+            position: new THREE.Vector3(4, 11, -2.2),
+            cameraPosition: new THREE.Vector3(10, 10.85, -1),
+            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
+        },
+        {
+            position: new THREE.Vector3(4, 6.2, -5),
+            cameraPosition: new THREE.Vector3(10, 6.07, -6.5),
+            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
+        },
+    ];
 
         cubeSettings.forEach(setting => {
             const cube = new THREE.Mesh(cubeGeometry, invisibleMaterial);
@@ -201,23 +206,31 @@ export default class Camera {
 
     resize() {
         const aspect = this.sizes.width / this.sizes.height;
-        const initialAspect = this.sizes.initialWidth / this.sizes.initialHeight; // Store initial width and height
-        const initialViewSize = this.sizes.frustrum; // Initial frustum value used in createOrthographicCamera
-    
-        const viewSize = (initialViewSize * aspect) / initialAspect;
-    
-        this.orthographicCamera.left = (-aspect * viewSize) / 2;
-        this.orthographicCamera.right = (aspect * viewSize) / 2;
-        this.orthographicCamera.top = viewSize / 2;
-        this.orthographicCamera.bottom = -viewSize / 2;
-    
+        const viewSize = this.sizes.frustrum;
+
+        console.log('Aspect Ratio:', aspect);
+        console.log('View Size:', viewSize);
+
+        this.orthographicCamera.left = (-aspect * viewSize) / 0.7;
+        this.orthographicCamera.right = (aspect * viewSize) / 0.7;
+        this.orthographicCamera.top = viewSize / 0.4;
+        this.orthographicCamera.bottom = -viewSize / 0.32;
+
         this.orthographicCamera.updateProjectionMatrix();
-        
-        console.log("New Width:", this.sizes.width);
-        console.log("New Height:", this.sizes.height);
-        console.log("New Aspect Ratio:", aspect);
-        console.log("New fustrum:", this.sizes.frustrum);
-    }
+
+        console.log('Resized Camera Properties:', {
+            left: this.orthographicCamera.left,
+            right: this.orthographicCamera.right,
+            top: this.orthographicCamera.top,
+            bottom: this.orthographicCamera.bottom,
+            near: this.orthographicCamera.near,
+            far: this.orthographicCamera.far,
+            position: this.orthographicCamera.position,
+        });
+        console.log('New Width:', this.sizes.width);
+        console.log('New Height:', this.sizes.height);
+    
+}
 
     update() {
         // Any necessary updates for the camera

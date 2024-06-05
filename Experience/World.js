@@ -41,7 +41,9 @@ export default class World {
             
         });
 
-        
+        this.experience.sizes.on('resize', () => {
+            this.resize();
+        });
 
     }
 
