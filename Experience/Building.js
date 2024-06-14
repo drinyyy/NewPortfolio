@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Experience from "./experience";
-import { GUI } from 'lil-gui';
+
 
 
 export default class Building {
@@ -21,7 +21,7 @@ export default class Building {
         this.createGround2();
         this.setAnimation();
        
-        this.setupGUI();
+       
     }
 
 

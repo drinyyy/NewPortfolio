@@ -70,7 +70,7 @@ export default class Rooms2 {
         this.actualRoom2.scale.set(1, 1.24, 0.6);
         this.actualRoom2.position.set(0.85, 3.29, -1.375);
         this.scene.add(this.actualRoom2);
-        console.log(this.actualRoom2);
+       
         const geometry = new THREE.PlaneGeometry(10, 3); // Plane geometry
         const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });
         this.plane1 = new THREE.Mesh(geometry, material); // Make plane1 a class property

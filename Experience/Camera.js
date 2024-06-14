@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import Experience from "./experience";
 import { gsap } from 'gsap';
-import GUI from 'lil-gui'; 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 export default class Camera {
     constructor() {
         this.experience = new Experience();
@@ -10,28 +9,20 @@ export default class Camera {
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
         
-        this.currentFrustum = { left: -7.5, right: 7.5, top: 15, bottom: -15, near: 0.1, far: 100 };
+        this.currentFrustum = { left: -7.5, right: 7.5, top: 16, bottom: -16, near: 0.1, far: 100 };
         this.createOrthographicCamera();
         this.setupRaycaster();
         this.createInvisibleCubes();
         this.attachMenuEventListeners();
 
-        window.addEventListener('resize', () => {
-            this.camera.aspect = window.innerWidth / window.innerHeight;
-            this.camera.updateProjectionMatrix();
-        });
-        window.addEventListener('orientationchange', () => {
-            this.resize();
-        });
+       
     }
 
     // 
     createOrthographicCamera() {
-        // Define different frustum sizes for mobile and other screens
         const frustumSizeMobile = 17;
         const frustumSizeDefault = 15;
     
-        // Check if the screen width is less than or equal to 480px (mobile)
         if (window.innerWidth <= 480) {
             this.frustumSize = frustumSizeMobile;
         } else {
@@ -53,8 +44,19 @@ export default class Camera {
         this.orthographicCamera.rotation.set(Math.PI, Math.PI / 2, -Math.PI);
         this.scene.add(this.orthographicCamera);
     
+        // Store initial frustum size and aspect ratio
         
+    
+        console.log("Portrait initial orthographic camera frustum:", {
+            left: this.orthographicCamera.left,
+            right: this.orthographicCamera.right,
+            top: this.orthographicCamera.top,
+            bottom: this.orthographicCamera.bottom,
+            aspect: this.aspect
+        });
     }
+    
+    
     
 
     createInvisibleCubes() {
@@ -207,6 +209,7 @@ export default class Camera {
                 frustum: isMobile 
                     ? { left: -2.5, right: 2.8, top: 10, bottom: -10, near: 0.1, far: 100 } 
                     : { left: -9, right: 9, top: 9, bottom: -9, near: 0.1, far: 100 }
+                    
             },
             "works-menu-item": {
                 cameraPosition: new THREE.Vector3(50, 0.07, -5.5),
@@ -248,6 +251,14 @@ export default class Camera {
                         ease: "power2.inOut",
                         onUpdate: () => {
                             this.orthographicCamera.updateProjectionMatrix();
+                            console.log("Updating orthographic camera frustum:", {
+                                left: this.orthographicCamera.left,
+                                right: this.orthographicCamera.right,
+                                top: this.orthographicCamera.top,
+                                bottom: this.orthographicCamera.bottom,
+                                near: this.orthographicCamera.near,
+                                far: this.orthographicCamera.far
+                            });
                         }
                     });
     
@@ -259,24 +270,28 @@ export default class Camera {
 
 
     resize() {
-
-
         this.aspect = window.innerWidth / window.innerHeight;
     
-        // Use the current frustum settings for resizing
-        this.orthographicCamera.left = (this.currentFrustum.left * this.aspect);
-        this.orthographicCamera.right = (this.currentFrustum.right * this.aspect);
-        this.orthographicCamera.top = this.currentFrustum.top;
-        this.orthographicCamera.bottom = this.currentFrustum.bottom;
+        // Update the camera frustum based on the new aspect ratio and initial frustum size
+        this.orthographicCamera.left = (-this.frustumSize * this.aspect) / 2;
+        this.orthographicCamera.right = (this.frustumSize * this.aspect) / 2;
+        this.orthographicCamera.top = this.frustumSize ;
+        this.orthographicCamera.bottom = -this.frustumSize ;
     
         // Update the projection matrix
         this.orthographicCamera.updateProjectionMatrix();
-        
+    
+        console.log("Portrait - orthographic camera frustum values after resize", {
+            left: this.orthographicCamera.left,
+            right: this.orthographicCamera.right,
+            top: this.orthographicCamera.top,
+            bottom: this.orthographicCamera.bottom,
+            aspect: this.aspect
+        });
     }
     
 
     update() {
-        // Example target that might change over time
         
     }
 }
