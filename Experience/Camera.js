@@ -1,83 +1,122 @@
 import * as THREE from 'three';
 import Experience from "./experience";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { gsap } from 'gsap';
-import GUI from 'lil-gui';
+import GUI from 'lil-gui'; 
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 export default class Camera {
     constructor() {
         this.experience = new Experience();
         this.sizes = this.experience.sizes;
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
-
+        
+        this.currentFrustum = { left: -7.5, right: 7.5, top: 15, bottom: -15, near: 0.1, far: 100 };
         this.createOrthographicCamera();
         this.setupRaycaster();
         this.createInvisibleCubes();
         this.attachMenuEventListeners();
-        
-        this.sizes.on('resize', () => {
+
+        window.addEventListener('resize', () => {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+        });
+        window.addEventListener('orientationchange', () => {
             this.resize();
         });
     }
 
+    // 
     createOrthographicCamera() {
+        // Define different frustum sizes for mobile and other screens
+        const frustumSizeMobile = 17;
+        const frustumSizeDefault = 15;
+    
+        // Check if the screen width is less than or equal to 480px (mobile)
+        if (window.innerWidth <= 480) {
+            this.frustumSize = frustumSizeMobile;
+        } else {
+            this.frustumSize = frustumSizeDefault;
+        }
+    
+        this.aspect = window.innerWidth / window.innerHeight;
+    
         this.orthographicCamera = new THREE.OrthographicCamera(
-            (-this.sizes.aspect * this.sizes.frustrum) / 0.7,
-            (this.sizes.aspect * this.sizes.frustrum) / 0.7,
-            this.sizes.frustrum / 0.4,
-            -this.sizes.frustrum / 0.32,
-            -50,
-            50
+            (-this.frustumSize * this.aspect) / 2,
+            (this.frustumSize * this.aspect) / 2,
+            this.frustumSize / 1,
+            -this.frustumSize / 1,
+            0.1,
+            100
         );
-        this.orthographicCamera.position.set(20, 12, -3);
+    
+        this.orthographicCamera.position.set(20, 12, -3.6);
         this.orthographicCamera.rotation.set(Math.PI, Math.PI / 2, -Math.PI);
         this.scene.add(this.orthographicCamera);
-
-        console.log('Initial Camera Properties:', this.orthographicCamera);
-        console.log('Initial Sizes:', this.sizes);
+    
+        
     }
-
     
 
     createInvisibleCubes() {
+        const isMobile = window.innerWidth <= 400;
         this.targetCubes = [];
         const cubeGeometry = new THREE.BoxGeometry(1, 3, 1.5);
         const invisibleMaterial = new THREE.MeshBasicMaterial({ visible: false });
-
-        const aspect = this.sizes.width / this.sizes.height;
-        const viewSize = this.sizes.frustrum;
     
-    const cubeSettings = [
-        {
-            position: new THREE.Vector3(4, 16, -2.5),
-            cameraPosition: new THREE.Vector3(10, 15.63, -1),
-            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
-        },
-        {
-            position: new THREE.Vector3(4, 16, -5.1),
-            cameraPosition: new THREE.Vector3(10, 15.63, -6.5),
-            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
-        },
-        {
-            position: new THREE.Vector3(4, 16, -2.5),
-            cameraPosition: new THREE.Vector3(10, 15.5, -1),
-            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
-        },
-        {
-            position: new THREE.Vector3(4, 11, -2.2),
-            cameraPosition: new THREE.Vector3(10, 10.85, -1),
-            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
-        },
-        {
-            position: new THREE.Vector3(4, 6.2, -5),
-            cameraPosition: new THREE.Vector3(10, 6.07, -6.5),
-            frustum: { left: (-aspect * viewSize) / 4, right: (aspect * viewSize) / 4, top: viewSize / 2, bottom: -viewSize / 2, near: 0.1, far: 100 }
-        },
-    ];
-
+        const cubeSettings = [
+            {
+                position: new THREE.Vector3(4, 16, -2.5),
+                cameraPosition: isMobile 
+                    ? new THREE.Vector3(10, 15.63, -1)
+                    : new THREE.Vector3(10, 15.63, -1),
+                frustum: isMobile 
+                    ? { left: -1.8, right: 2.24, top: 6.7, bottom: -2.78, near: 0.1, far: 100 }
+                    : { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
+            },
+            {
+                position: new THREE.Vector3(4, 16, -5.1),
+                cameraPosition: isMobile 
+                    ? new THREE.Vector3(10, 15.63, -6.5)
+                    : new THREE.Vector3(10, 15.63, -6.5),
+                frustum: isMobile 
+                    ? { left: -2.04, right: 1.88, top: 5.12, bottom: -2.78, near: 0.1, far: 100 }
+                    : { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
+            },
+            {
+                position: new THREE.Vector3(4, 16, -2.5),
+                cameraPosition: isMobile 
+                    ? new THREE.Vector3(10, 15.5, -1)
+                    : new THREE.Vector3(10, 15.5, -1),
+                frustum: isMobile 
+                    ? { left: -0.82, right: 1.64, top: 2.9, bottom: -2.54, near: 0.1, far: 100 }
+                    : { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
+            },
+            {
+                position: new THREE.Vector3(4, 11, -2.2),
+                cameraPosition: isMobile 
+                    ? new THREE.Vector3(10, 10.85, -1)
+                    : new THREE.Vector3(10, 10.85, -1),
+                frustum: isMobile 
+                    ? { left: -0.82, right: 1.64, top: 2.9, bottom: -2.54, near: 0.1, far: 100 }
+                    : { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
+            },
+            {
+                position: new THREE.Vector3(4, 6.2, -5),
+                cameraPosition: isMobile 
+                    ? new THREE.Vector3(10, 6.07, -6.5)
+                    : new THREE.Vector3(10, 6.07, -6.5),
+                frustum: isMobile 
+                    ? { left: -2.04, right: 1.16, top: 2.9, bottom: -2.5, near: 0.1, far: 100 }
+                    : { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.1, far: 100 }
+            }
+        ];
+    
         cubeSettings.forEach(setting => {
             const cube = new THREE.Mesh(cubeGeometry, invisibleMaterial);
             cube.position.copy(setting.position);
+            if (setting.scale) {
+                cube.scale.copy(setting.scale);
+            }
             cube.userData = {
                 cameraPosition: setting.cameraPosition,
                 frustum: setting.frustum
@@ -86,6 +125,7 @@ export default class Camera {
             this.targetCubes.push(cube);
         });
     }
+    
 
     setupRaycaster() {
         this.raycaster = new THREE.Raycaster();
@@ -93,37 +133,37 @@ export default class Camera {
         this.canvas.addEventListener('mousemove', (event) => {
             this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
+    
             this.camera = this.orthographicCamera;
-
+    
             if (this.isCameraAtAboutMenuItem()) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.targetCubes);
-
+    
                 if (intersects.length > 0) {
-                    this.canvas.style.cursor = `url('public/textures/click.png'), pointer`;
+                    this.canvas.style.cursor = `url('/textures/click.png'), pointer`;
                 } else {
-                    this.canvas.style.cursor = `url('public/textures/pointer2.png'), pointer`;
+                    this.canvas.style.cursor = `url('/textures/pointer2.png'), pointer`;
                 }
             } else {
-                this.canvas.style.cursor = `url('public/textures/pointer2.png'), pointer`;
+                this.canvas.style.cursor = `url('/textures/pointer2.png'), pointer`;
             }
         });
-
+    
         this.canvas.addEventListener('click', (event) => {
             this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
             this.camera = this.orthographicCamera;
-
+    
             if (this.isCameraAtAboutMenuItem()) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.targetCubes);
-
+    
                 if (intersects.length > 0) {
                     const targetCube = intersects[0].object;
                     const cameraPosition = targetCube.userData.cameraPosition;
                     const frustum = targetCube.userData.frustum;
-
+    
                     gsap.to(this.camera.position, {
                         x: cameraPosition.x,
                         y: cameraPosition.y,
@@ -131,53 +171,64 @@ export default class Camera {
                         duration: 2,
                         ease: "power2.inOut"
                     });
-
+    
                     gsap.to(this.camera, {
                         left: frustum.left,
                         right: frustum.right,
                         top: frustum.top,
                         bottom: frustum.bottom,
-                        near: frustum.near || this.camera.near,
-                        far: frustum.far || this.camera.far,
+                        near: frustum.near || this.nearPlane,
+                        far: frustum.far || this.farPlane,
                         duration: 2,
                         ease: "power2.inOut",
                         onUpdate: () => {
                             this.camera.updateProjectionMatrix();
                         }
                     });
+    
+                    this.currentFrustum = frustum;
                 }
             }
         });
     }
 
     isCameraAtAboutMenuItem() {
-        const aboutMenuPosition = new THREE.Vector3(50, 12, -3.5);
-        return this.camera.position.equals(aboutMenuPosition);
+        const aboutMenuPosition = new THREE.Vector3(50, 12, -3.5); // "about-menu-item" camera position
+        return this.camera.position.equals(aboutMenuPosition); // Strict equality check for position
     }
 
+    
     attachMenuEventListeners() {
+        const isMobile = window.innerWidth <= 400;
+    
         const menuSettings = {
             "about-menu-item": {
                 cameraPosition: new THREE.Vector3(50, 12, -3.5),
-                frustum: { left: -8, right: 8, top: 8, bottom: -8, near: 0.1, far: 100 }
+                frustum: isMobile 
+                    ? { left: -2.5, right: 2.8, top: 10, bottom: -10, near: 0.1, far: 100 } 
+                    : { left: -9, right: 9, top: 9, bottom: -9, near: 0.1, far: 100 }
             },
             "works-menu-item": {
                 cameraPosition: new THREE.Vector3(50, 0.07, -5.5),
-                frustum: { left: -3, right: 3, top: 3, bottom: -3, near: 0.1, far: 1000 }
+                frustum: isMobile 
+                    ? { left: -4, right: 3, top: 8, bottom: -4, near: 0.1, far: 1000 }
+                    : { left: -3, right: 3, top: 3, bottom: -3, near: 0.1, far: 1000 }
             },
             "contact-menu-item": {
                 cameraPosition: new THREE.Vector3(50, 24.5, -3.5),
-                frustum: { left: -7, right: 7, top: 7, bottom: -7, near: 0.1, far: 100 }
+                frustum: isMobile 
+                    ? { left: -3.12, right: 3.12, top: 7, bottom: -7, near: 0.1, far: 100 }
+                    : { left: -7, right: 7, top: 7, bottom: -7, near: 0.1, far: 100 }
             }
         };
-
+    
         Object.keys(menuSettings).forEach(menuItemId => {
             const menuItem = document.getElementById(menuItemId);
             if (menuItem) {
                 menuItem.addEventListener('click', () => {
                     const settings = menuSettings[menuItemId];
                     const { cameraPosition, frustum } = settings;
-
+    
                     gsap.to(this.orthographicCamera.position, {
                         x: cameraPosition.x,
                         y: cameraPosition.y,
@@ -185,7 +236,7 @@ export default class Camera {
                         duration: 3,
                         ease: "power2.inOut"
                     });
-
+    
                     gsap.to(this.orthographicCamera, {
                         left: frustum.left,
                         right: frustum.right,
@@ -199,40 +250,33 @@ export default class Camera {
                             this.orthographicCamera.updateProjectionMatrix();
                         }
                     });
+    
+                    this.currentFrustum = frustum;
                 });
             }
         });
     }
 
+
     resize() {
-        const aspect = this.sizes.width / this.sizes.height;
-        const viewSize = this.sizes.frustrum;
 
-        console.log('Aspect Ratio:', aspect);
-        console.log('View Size:', viewSize);
 
-        this.orthographicCamera.left = (-aspect * viewSize) / 0.7;
-        this.orthographicCamera.right = (aspect * viewSize) / 0.7;
-        this.orthographicCamera.top = viewSize / 0.4;
-        this.orthographicCamera.bottom = -viewSize / 0.32;
-
-        this.orthographicCamera.updateProjectionMatrix();
-
-        console.log('Resized Camera Properties:', {
-            left: this.orthographicCamera.left,
-            right: this.orthographicCamera.right,
-            top: this.orthographicCamera.top,
-            bottom: this.orthographicCamera.bottom,
-            near: this.orthographicCamera.near,
-            far: this.orthographicCamera.far,
-            position: this.orthographicCamera.position,
-        });
-        console.log('New Width:', this.sizes.width);
-        console.log('New Height:', this.sizes.height);
+        this.aspect = window.innerWidth / window.innerHeight;
     
-}
+        // Use the current frustum settings for resizing
+        this.orthographicCamera.left = (this.currentFrustum.left * this.aspect);
+        this.orthographicCamera.right = (this.currentFrustum.right * this.aspect);
+        this.orthographicCamera.top = this.currentFrustum.top;
+        this.orthographicCamera.bottom = this.currentFrustum.bottom;
+    
+        // Update the projection matrix
+        this.orthographicCamera.updateProjectionMatrix();
+        
+    }
+    
 
     update() {
-        // Any necessary updates for the camera
+        // Example target that might change over time
+        
     }
 }

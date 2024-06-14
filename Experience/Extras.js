@@ -32,7 +32,7 @@ export default class Extras {
         });
 
         this.actualExtras.scale.set(1, 2, 1);
-        this.actualExtras.position.set(0, -5.02, -8);
+        this.actualExtras.position.set(0, -5.02, -7.9);
         this.scene.add(this.actualExtras);
     }
 

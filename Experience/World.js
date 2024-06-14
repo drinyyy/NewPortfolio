@@ -28,7 +28,6 @@ export default class World {
             
             this.extras = new Extras();
             this.sign = new Sign()
-            // this.curtain = new Curtain();
             this.teddy = new Teddy();
             this.carpet = new carpetGame();
             this.library = new Library();
@@ -57,31 +56,8 @@ resize() {}
             this.rooms2.update();
         }
 
-        if(this.rooms3){
-            this.rooms3.update();
-        }
-
-        if(this.rooms4){
-            this.rooms4.update();
-        }
-        if(this.building){
-            this.building.update();
-        }
-
-        if(this.extras){
-            this.extras.update();
-        }
-
-        if(this.environment){
-            this.environment.update();
-        }
-
-        if(this.teddy){
-            this.teddy.update();
-        }
         if(this.library){
             this.library.update();
-        }
-        
+        } 
     }
 }

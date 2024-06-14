@@ -12,7 +12,7 @@ export default class Environment {
         this.setAmbientLightRoom1();
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
-        this.gui = new GUI();
+        // this.gui = new GUI();
         // this.setGUI();
         this.initCameraPosition = new THREE.Vector3(50, 12, -3.5); // Desired camera position
         this.currentCameraPosition = new THREE.Vector3();
@@ -24,15 +24,15 @@ export default class Environment {
         this.scene.add(this.ambientLight);
     }
 
-    setGUI() {
-        // GUI controls for ambient light
-        const ambientLightFolder = this.gui.addFolder('Ambient Light');
-        ambientLightFolder.addColor(this.ambientLight, 'color').name('Color').onChange((value) => {
-            this.ambientLight.color.set(value);
-        });
-        ambientLightFolder.add(this.ambientLight, 'intensity', 0, 2).name('Intensity');
-        ambientLightFolder.open();
-    }
+    // setGUI() {
+    //     // GUI controls for ambient light
+    //     const ambientLightFolder = this.gui.addFolder('Ambient Light');
+    //     ambientLightFolder.addColor(this.ambientLight, 'color').name('Color').onChange((value) => {
+    //         this.ambientLight.color.set(value);
+    //     });
+    //     ambientLightFolder.add(this.ambientLight, 'intensity', 0, 2).name('Intensity');
+    //     ambientLightFolder.open();
+    // }
 
     update() {
         
@@ -41,7 +41,7 @@ export default class Environment {
         
         if (cameraPosition.equals(this.initCameraPosition) && !this.intensitySet) {
             
-            gsap.to(this.ambientLight, { intensity: 1.2, duration: 2 });
+            gsap.to(this.ambientLight, { intensity: 1.2, duration: 1 });
             this.intensitySet = true; 
         }
     }

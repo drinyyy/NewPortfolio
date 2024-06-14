@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import Experience from "./experience";
+
 import { EventEmitter } from "events";
 
 export default class Sizes extends EventEmitter {
@@ -13,12 +12,15 @@ export default class Sizes extends EventEmitter {
         
 
 
-        window.addEventListener("resize",()=>{
+      
+
+        window.addEventListener("resize", () => {
             this.width = window.innerWidth;
             this.height = window.innerHeight;
-            this.aspect = this.width/this.height;
-            this.pixelRatio = Math.min(window.devicePixelRatio, 2)
-            this.emit("resize")
-        })
+            this.aspect = this.width / this.height;
+            this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+            this.emit("resize");
+        });
+        
     }
 }

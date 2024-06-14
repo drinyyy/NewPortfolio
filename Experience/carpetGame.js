@@ -19,7 +19,7 @@ export default class carpetGame {
     setModel() {
         const textureLoader = new THREE.TextureLoader()
     
-    const carpetTexture = textureLoader.load('/public/textures/carpet.png') 
+    const carpetTexture = textureLoader.load('/textures/carpet.png') 
         
     carpetTexture.flipY = false;
     carpetTexture.encoding = THREE.sRGBEncoding;

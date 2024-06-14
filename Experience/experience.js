@@ -22,8 +22,8 @@ export default class Experience{
         this.sizes= new Sizes();
         this.time = new Time();
         this.scene = new THREE.Scene();
-        this.camera = new Camera();
-        this.renderer = new Renderer();
+        this.camera = new Camera(this); // Pass experience instance to camera
+        this.renderer = new Renderer(this);
         this.resources = new Resources(assets);
         this.world = new World();
         this.lightControls = new LightControls(this.scene);

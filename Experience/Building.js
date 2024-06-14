@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Experience from "./experience";
-
+import { GUI } from 'lil-gui';
 
 
 export default class Building {
@@ -17,16 +17,18 @@ export default class Building {
         this.setModel1();
         this.createCityBackground();
         this.createGround();
+        this.createGround3();
         this.createGround2();
         this.setAnimation();
-        
+       
+        this.setupGUI();
     }
 
 
     setModel1() {
     const textureLoader = new THREE.TextureLoader()
     
-    const buildingTexture = textureLoader.load('/public/textures/image2.png') 
+    const buildingTexture = textureLoader.load('/textures/image2.png') 
         
         buildingTexture.flipY = false;
         buildingTexture.encoding = THREE.sRGBEncoding;
@@ -41,7 +43,7 @@ export default class Building {
         
 
         if (child.name === "Colors_6" && child.parent && child.parent.name === "Building") {
-            child.material = new THREE.MeshStandardMaterial({ color: 0x98CDE5});
+            child.material = new THREE.MeshBasicMaterial({ color: 0x98CDE5});
         }
 
             
@@ -64,7 +66,7 @@ export default class Building {
 
     createCityBackground() {
         const geometry = new THREE.PlaneGeometry(50, 100);
-        const materialColor = new THREE.Color(0x0A1A27);
+        const materialColor = new THREE.Color(0x0a1a27);
         const material = new THREE.MeshBasicMaterial({
            
             color: materialColor,
@@ -88,6 +90,13 @@ export default class Building {
     this.ground.position.set(1,-7.7,-3)
     this.scene.add(this.ground)
     }
+    createGround3(){
+        const geometryground = new THREE.BoxGeometry(20, 10, 50);
+        this.materialground3 = new THREE.MeshBasicMaterial({ color: 0x1C3445 });
+        this.ground3 = new THREE.Mesh(geometryground, this.materialground3);
+        this.ground3.position.set(-10, -7, -3);
+        this.scene.add(this.ground3);
+    }
     createGround2(){
         const geometryground = new THREE.BoxGeometry( 25, 10, 50 ); 
     const materialground = new THREE.MeshBasicMaterial({ color: 0x132430 ,  });
@@ -99,6 +108,8 @@ export default class Building {
     setAnimation() {
        
     }
+
+   
     resize(){}
 
     update(){

@@ -7,4 +7,4 @@ document.getElementById('about-menu-item').addEventListener('click', () => {
   });
 
 
-  
+  document.body.style.overflow = 'hidden';

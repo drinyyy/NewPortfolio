@@ -20,7 +20,7 @@ export default class Library {
 
         const textureLoader = new THREE.TextureLoader()
     
-    const libraryTexture = textureLoader.load('/public/textures/library2.png') 
+    const libraryTexture = textureLoader.load('/textures/library2.png') 
         
     libraryTexture.flipY = false;
     libraryTexture.encoding = THREE.sRGBEncoding;

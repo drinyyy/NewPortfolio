@@ -17,7 +17,7 @@ export default class Teddy {
 
     setModel5() {
         const textureLoader = new THREE.TextureLoader();
-        const teddyTexture = textureLoader.load('/public/textures/teddy2.png');
+        const teddyTexture = textureLoader.load('/textures/teddy2.png');
         
         teddyTexture.flipY = false;
         teddyTexture.encoding = THREE.sRGBEncoding;
