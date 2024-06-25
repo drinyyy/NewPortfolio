@@ -22,6 +22,7 @@ export default class Sign {
         this.setModel();
         this.setInvisibleCubes();
         this.setRaycaster();
+        this.setupMenu(); 
     }
 
     createVideoTexture(src) {
@@ -170,29 +171,39 @@ export default class Sign {
             }
         });
     }
-
+    
     hideAllProjectItems() {
         this.projectItems.forEach(item => {
             gsap.to(item, { duration: 0.5, opacity: 0, display: 'none', onComplete: () => item.classList.add('hide') });
             item.classList.remove('show');
         });
         this.currentlyVisibleIndex = null;
+        console.log('All project items hidden');
     }
 
     setupMenu() {
         const aboutMenuItem = document.getElementById('about-menu-item');
         const contactMenuItem = document.getElementById('contact-menu-item');
 
-        aboutMenuItem.addEventListener('click', () => {
-            this.hideAllProjectItems();
-        });
+        if (aboutMenuItem) {
+            aboutMenuItem.addEventListener('click', () => {
+                console.log('About menu item clicked');
+                this.hideAllProjectItems();
+            });
+        } else {
+            console.error('About menu item not found');
+        }
 
-        
-
-        contactMenuItem.addEventListener('click', () => {
-            this.hideAllProjectItems();
-        });
+        if (contactMenuItem) {
+            contactMenuItem.addEventListener('click', () => {
+                console.log('Contact menu item clicked');
+                this.hideAllProjectItems();
+            });
+        } else {
+            console.error('Contact menu item not found');
+        }
     }
+
     setAnimation() {}
 
     resize() {}

@@ -169,7 +169,7 @@ export default class Controls {
 
 
     intro3() {
-        const targetPosition = new THREE.Vector3(10, 10.85, -1);
+        const targetPosition = new THREE.Vector3(10, 10.85, 0);
     
         const elements = [
             { id: 'intro3', delay: 0.3, display: true },
@@ -314,6 +314,62 @@ export default class Controls {
         });
     }
 
+
+    contact() {
+        const targetPosition = new THREE.Vector3(50, 22.5, -3.5);
+        const elements = [
+            { id: 'text', delay: 0 },
+            { id: 'animated-title', delay: 0 },
+        ];
+    
+        const resetElementStyles = () => {
+            elements.forEach(element => {
+                const el = document.getElementById(element.id);
+                if (el) {
+                    gsap.killTweensOf(el);
+                    el.style.opacity = 0;
+                    el.style.visibility = 'hidden';
+                    el.style.pointerEvents = 'none';
+                    el.style.display = 'block';
+                    el.querySelectorAll('.animated').forEach(animEl => {
+                        animEl.classList.remove('animated');
+                    });
+                }
+            });
+        };
+    
+        const animateElement = (element, delay) => {
+            const el = document.getElementById(element.id);
+            if (el) {
+                if (this.cameraPosition.equals(targetPosition)) {
+                    gsap.to(el, {
+                        opacity: 1,
+                        duration: 2,
+                        delay: delay,
+                        onStart: () => {
+                            el.style.visibility = 'visible';
+                            el.style.display = 'block';
+                        },
+                        onComplete: () => {
+                            el.style.pointerEvents = 'auto';
+                            el.querySelectorAll('div').forEach(animEl => {
+                                animEl.classList.add('animated');
+                            });
+                        }
+                    });
+                } 
+            }
+        };
+    
+        if (!this.cameraPosition.equals(targetPosition)) {
+            resetElementStyles();
+        }
+    
+        elements.forEach(element => {
+            animateElement(element, element.delay);
+        });
+    }
+    
     resize() {
         
     }
@@ -325,6 +381,7 @@ export default class Controls {
         this.intro2();
         this.intro3();
         this.intro4();
+        this.contact();
     }
     
     

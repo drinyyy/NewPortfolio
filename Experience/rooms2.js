@@ -127,9 +127,10 @@ export default class Rooms2 {
 
     tvModel() {
         const geometry = new THREE.PlaneGeometry(0.2, 0.4); // Plane geometry
-        const texture = new THREE.TextureLoader().load('/textures/toystory.jpg'); // Load texture
-        const material = new THREE.MeshStandardMaterial({ map: texture, side: THREE.DoubleSide, emissive: 1, });
-        const plane = new THREE.Mesh(geometry, material);
+        this.texture = new THREE.TextureLoader().load('/textures/toystory.jpg'); // Load texture
+        this.texture1 = new THREE.TextureLoader().load('/textures/goodfellas.jpg'); // Load texture
+        this.material = new THREE.MeshStandardMaterial({ map: this.texture, side: THREE.DoubleSide, emissive: 1, });
+        const plane = new THREE.Mesh(geometry, this.material);
 
         plane.position.set(1.9, 15.53, -5.05); // Set position if necessary
         plane.rotation.y = Math.PI / 2; // Rotate plane 90 degrees around Y-axis
@@ -139,16 +140,20 @@ export default class Rooms2 {
         const pointLight1 = new THREE.PointLight(0xffffff, 0, 100);
         const pointLight2 = new THREE.PointLight(0xffffff, 0, 100);
         const pointLight3 = new THREE.PointLight(0xffffff, 0, 100);
+
         pointLight.position.set(3.76, 15.08, -4.6); // Set light position relative to the plane
         pointLight1.position.set(2.5, 16, -4.67);
         pointLight2.position.set(2.9, 16, -5.6);
         pointLight3.position.set(4.76, 15.08, -5.56); 
+
         pointLight.castShadow = true;
         pointLight1.castShadow = true;
         pointLight2.castShadow = true;
         pointLight3.castShadow = true;
         pointLight2.shadow.bias = -0.0005;
         pointLight1.shadow.bias = -0.0005;
+
+
         this.scene.add(pointLight);
         this.scene.add(pointLight1);
         this.scene.add(pointLight2);
@@ -204,11 +209,15 @@ export default class Rooms2 {
                 gsap.to(this.pointLight1, { intensity: 2, duration: 1 });
                 gsap.to(this.pointLight2, { intensity: 0, duration: 1 });
                 gsap.to(this.pointLight3, { intensity: 0, duration: 1 });
+                this.plane.material.map = this.texture;
+                this.plane.material.needsUpdate = true;
             } else if (zPosition >= -5.26 && zPosition < -5.15) {
                 gsap.to(this.pointLight, { intensity: 0, duration: 1 });
                 gsap.to(this.pointLight1, { intensity: 0, duration: 1 });
                 gsap.to(this.pointLight2, { intensity: 2, duration: 1 });
                 gsap.to(this.pointLight3, { intensity: 2, duration: 1 });
+                this.plane.material.map = this.texture1;
+                this.plane.material.needsUpdate = true;
             }
         }
     }

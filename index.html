@@ -3,17 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi, minimal-ui " />
     <title>Vite App</title>
   </head>
   <body>
-    
+   
     <div class="experience">
       <canvas class="experience-canvas"></canvas>
     </div>
 
     
-    <div id="blur-container"></div>
       <div id="menu">
           <div id="about-menu-item" class="menu-item">About</div>
           <div id="works-menu-item" class="menu-item">Works</div>
@@ -22,12 +21,6 @@
       </div>
 
 
-    <!-- <div class="intro" id="intro">
-      <h1>Hello There . . .</h1>
-      <p>I'm Drin Lajci, but feel free to call me Drin.<br><br> As a 3D Front End Developer, I craft engaging digital experiences with a blend of modern aesthetics.</p>
-      <a href="#about" id="cta-button">More About Me</a>
-    </div>
-     -->
 
 
 
@@ -92,6 +85,37 @@
     </div>
 
 
+    
+
+    <div id="text">
+      <p>Say&nbsp;</p>
+      <p>
+        <span class="word wisteria">Hello !</span>
+        <span class="word belize">Ciao !</span>
+        <span class="word pomegranate">Bonjour !</span>
+        <span class="word green">Nǐ hǎo !</span>
+        <span class="word midnight">Hola !</span>
+        <span class="word blue">Konichiwa  !</span>
+        <span class="word yellow">Përshëndetje !</span>
+      </p>
+    </div>
+
+
+    <div id="animated-title">
+      <div class="text-top">
+        <div>
+          
+          <span>
+            <a href="mailto:contact@drinlajci.com">contact@drinlajci.com</a>
+          </span>
+        </div>
+      </div>
+      <div class="text-bottom">
+        <div>
+          <a href="https://www.linkedin.com/in/drinlajci" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
  
     
@@ -104,11 +128,11 @@
     // GSAP animation for the menu items using fromTo()
     gsap.fromTo(".menu-item", {
         opacity: 0,
-        y: -200
+        x: 200
     }, {
         duration: 1, // Duration of the animation for each menu item
         opacity: 1, // Animate to full opacity
-        y: 0, // Move to their final position
+        x: 0, // Move to their final position
         stagger: 0.35, // Stagger the start of each menu item's animation by 0.1 seconds
         ease: "power2.out" // Use an easing function for a smooth transition
     });

@@ -54,10 +54,14 @@ export default class Rooms4 {
         }
         if (child.name === "avaturn_shoes_0004"){
             child.material = new THREE.MeshStandardMaterial({ color:  0xffffff});
+            this.rotateShoess(child);
         }
 
         if (child.name === "avaturn_shoes_0001"){
             child.material = new THREE.MeshStandardMaterial({ color:  0x000000 });
+            this.rotateShoes(child);
+            child.position.set(1.84, 1.26, -5.43); // Set the position for avaturn_shoes_0004
+            console.log(child.position)
         }
         
             
@@ -69,7 +73,27 @@ export default class Rooms4 {
        
         
     }
-    
+    rotateShoes(shoe) {
+        const targetPosition = new THREE.Vector3(10, 6.07, -6.5);
+        const update = () => {
+            if (this.camera.orthographicCamera.position.equals(targetPosition)) {
+                gsap.to(shoe.rotation, { y: "+=4.28", duration: 10, repeat: -1, ease: "linear" }); // Rotate continuously
+            }
+            requestAnimationFrame(update);
+        };
+        update();
+    }
+
+    rotateShoess(shoe) {
+        const targetPosition = new THREE.Vector3(10, 6.07, -6.5);
+        const update = () => {
+            if (this.camera.orthographicCamera.position.equals(targetPosition)) {
+                gsap.to(shoe.rotation, { y: "-=4.28", duration: 10, repeat: -1, ease: "linear" }); // Rotate continuously
+            }
+            requestAnimationFrame(update);
+        };
+        update();
+    }
     
     setClickableAnimation(material) {
         const targetPosition = new THREE.Vector3(50, 12, -3.5); // Set the target position

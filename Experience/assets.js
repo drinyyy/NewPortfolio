@@ -22,6 +22,16 @@ export default [
         type: "glbModel",
         path: "/models/extras2.glb",
     },
+    {
+        name: "extras3",
+        type: "glbModel",
+        path: "/models/contact.glb",
+    },
+    {
+        name: "extras4",
+        type: "glbModel",
+        path: "/models/extras3.glb",
+    },
 
     {
         name: "carpetgame",

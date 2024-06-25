@@ -141,14 +141,14 @@ export default class Camera {
             if (this.isCameraAtAboutMenuItem()) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.targetCubes);
-    
+            
                 if (intersects.length > 0) {
-                    this.canvas.style.cursor = `url('/textures/click.png'), pointer`;
+                    this.canvas.style.cursor = "url('/textures/click.png'), pointer";
                 } else {
-                    this.canvas.style.cursor = `url('/textures/pointer2.png'), pointer`;
+                    this.canvas.style.cursor = "url('/textures/pointer2.png'), pointer";
                 }
             } else {
-                this.canvas.style.cursor = `url('/textures/pointer2.png'), pointer`;
+                this.canvas.style.cursor = "url('/textures/pointer2.png'), pointer";
             }
         });
     
@@ -201,7 +201,7 @@ export default class Camera {
 
     
     attachMenuEventListeners() {
-        const isMobile = window.innerWidth <= 400;
+        const isMobile = window.innerWidth <= 480;
     
         const menuSettings = {
             "about-menu-item": {
@@ -218,10 +218,10 @@ export default class Camera {
                     : { left: -3, right: 3, top: 3, bottom: -3, near: 0.1, far: 1000 }
             },
             "contact-menu-item": {
-                cameraPosition: new THREE.Vector3(50, 24.5, -3.5),
+                cameraPosition: new THREE.Vector3(50, 22.5, -3.5),
                 frustum: isMobile 
                     ? { left: -3.12, right: 3.12, top: 7, bottom: -7, near: 0.1, far: 100 }
-                    : { left: -7, right: 7, top: 7, bottom: -7, near: 0.1, far: 100 }
+                    : { left: -4, right: 4, top: 4, bottom: -4, near: 0.1, far: 100 }
             }
         };
     
@@ -251,14 +251,14 @@ export default class Camera {
                         ease: "power2.inOut",
                         onUpdate: () => {
                             this.orthographicCamera.updateProjectionMatrix();
-                            console.log("Updating orthographic camera frustum:", {
-                                left: this.orthographicCamera.left,
-                                right: this.orthographicCamera.right,
-                                top: this.orthographicCamera.top,
-                                bottom: this.orthographicCamera.bottom,
-                                near: this.orthographicCamera.near,
-                                far: this.orthographicCamera.far
-                            });
+                            // console.log("Updating orthographic camera frustum:", {
+                            //     left: this.orthographicCamera.left,
+                            //     right: this.orthographicCamera.right,
+                            //     top: this.orthographicCamera.top,
+                            //     bottom: this.orthographicCamera.bottom,
+                            //     near: this.orthographicCamera.near,
+                            //     far: this.orthographicCamera.far
+                            // });
                         }
                     });
     
@@ -271,23 +271,26 @@ export default class Camera {
 
     resize() {
         this.aspect = window.innerWidth / window.innerHeight;
-    
+        
+        
         // Update the camera frustum based on the new aspect ratio and initial frustum size
         this.orthographicCamera.left = (-this.frustumSize * this.aspect) / 2;
         this.orthographicCamera.right = (this.frustumSize * this.aspect) / 2;
-        this.orthographicCamera.top = this.frustumSize ;
-        this.orthographicCamera.bottom = -this.frustumSize ;
+        this.orthographicCamera.top = this.frustumSize /1;
+        this.orthographicCamera.bottom = -this.frustumSize /1;
     
         // Update the projection matrix
         this.orthographicCamera.updateProjectionMatrix();
     
-        console.log("Portrait - orthographic camera frustum values after resize", {
-            left: this.orthographicCamera.left,
-            right: this.orthographicCamera.right,
-            top: this.orthographicCamera.top,
-            bottom: this.orthographicCamera.bottom,
-            aspect: this.aspect
-        });
+        // console.log("Portrait - orthographic camera frustum values after resize", {
+        //     left: this.orthographicCamera.left,
+        //     right: this.orthographicCamera.right,
+        //     top: this.orthographicCamera.top,
+        //     bottom: this.orthographicCamera.bottom,
+        //     aspect: this.aspect
+        // });
+        // console.log(window.innerHeight)
+        // console.log(window.innerWidth)
     }
     
 

@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
 
 
 *{
@@ -13,15 +13,17 @@
   padding: 0;
   box-sizing: border-box;
   cursor: url('/textures/pointer2.png'), auto;
-  overflow: hidden;
+  
+  
 }
 
 
 .experience{
   position: fixed;
+  
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  
 }
 
 .experience-canvas{
@@ -31,94 +33,76 @@
 }
 
 
-
-
-#startBtn {
-  position: absolute;
-  left: 50%;
-  top: 70%;
-  padding: 10px 20px;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  z-index: 100;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 36px;
-  font-family: "Italiana", sans-serif;
-  background-color: rgba(255, 255, 255, 0);
-  overflow: hidden;
-  
+@font-face {
+  font-family: "Font1";
+  src: url("textures/font.otf");
 }
 
 
-.char {
-  display: inline-block;
-  transform: translateY(100px);
-  overflow: hidden;
-}
+
+
+
 
 #menu {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  left: 50%;
-  top: 6%;
-  transform: translate(-50%, -60%);
-  padding: 20px;
+  
+  
+  position: fixed;
+  right: 0%;
+  top: 5%;
+
+  padding: 0px;
   z-index: 100;
   font-family: "Italiana", sans-serif;
-  overflow: hidden;
+  
 }
 
 .menu-item {
   cursor: pointer;
-  font-size: 3em;
-  color: #9e9e9e;
+  font-size: 2em;
+  color: #999999;
   text-transform: uppercase;
-  padding: 10px 70px;
+  padding: 8px 40px;
   transition: color 0.3s ease;
   cursor: url('/textures/click.png'), pointer;
-  overflow: hidden;
+
+  
 }
 
 .menu-item:hover {
   color: #ffffff;
+  
 }
- #blur-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 8%;
-  backdrop-filter: blur(10px); /* Apply blur effect */
-  -webkit-backdrop-filter: blur(10px); /* Ensure compatibility with iOS devices */
-  background-color: rgba(247, 231, 211, 0); /* Slightly transparent background */
-  z-index: 99; /* Ensure it is behind the menu */
+ 
+
+
+.active {
+  color: #ffffff;
 }
 /* Tablet view */
 @media (max-width: 768px) {
   .menu-item {
+    right: 0%;
     font-size: 2em;
     padding: 10px 35px;
   }
   #menu {
+    right: 0%;
     top: 6%;
-    justify-content: center;
-    width: 100%;
+    
+    
   }
 }
 
 /* Mobile view */
 @media (max-width: 480px) {
   .menu-item {
-    font-size: 1.5em;
-    padding: 10px;
+    font-size: 1.3em;
+    padding: 5px;
   }
   #menu {
-    top: 6%;
+    top: 2%;
     justify-content: center;
-    width: 100%;
+    
   }
 }
 /* .intro {
@@ -255,7 +239,7 @@ p {
 #intro2 {
   display: none;
   opacity: 0;
-  
+  overflow: hidden;
 }
 
 .about-text2 {
@@ -263,11 +247,11 @@ p {
   font-family: Arial, sans-serif;
   color: #ffffff;
   z-index: 100;
-  right: 6%;
-  top: 15%;
+  right: 0%;
+  top: 10%;
   width: 50%;
-  
-  margin-right: 10px ;
+  overflow: hidden;
+  margin-right: 15px ;
 }
 
 .big2-1 {
@@ -289,7 +273,7 @@ p {
   font-family: "Bebas Neue", sans-serif;
   z-index: 100; 
   display: block;
-  
+  overflow: hidden;
 }
 
 .normal2-1 {
@@ -306,11 +290,11 @@ p {
 
   
   font-family: "Quicksand", sans-serif;
-  font-size: 1em;
+  font-size: 0.8em;
   color: #e0e0e0;
   z-index: 100;
   overflow: hidden;
-  padding-left: 22%;
+  padding-left: 18%;
 }
 
 #intro2-1, #intro2-2, #intro2-3, #intro2-4 {
@@ -337,8 +321,8 @@ p {
   font-family: Arial, sans-serif;
   color: #ffffff;
   z-index: 100;
-  left: 1%;
-  top: 20%;
+  left: 3%;
+  top: 15%;
   width: 50%;
 }
 
@@ -349,7 +333,7 @@ p {
   color: #ececec;
   font-family: "Bebas Neue", sans-serif;
   z-index: 100;
-  overflow: hidden;
+
   line-height: 1em; 
 }
 
@@ -369,7 +353,7 @@ p {
   font-size: 1em;
   color: #e0e0e0;
   z-index: 100;
-  overflow: hidden;
+  
   
 
 }
@@ -479,9 +463,7 @@ INTRO 3 END */
 /* PROJECT DESCRIPTION */
 
 .projects-container {
-  position: absolute;
-  top: 55%;
-  right: 20%;
+  
   
   border-radius: 8px;
   max-width: 20%;
@@ -491,6 +473,10 @@ INTRO 3 END */
   margin-bottom: 20px;
   display: none;
   opacity: 0;
+  position: absolute;
+  top: 55%;
+  right: 19%;
+  max-width: 21%;
 }
 
 .project-item.show {
@@ -573,6 +559,168 @@ INTRO 3 END */
 .project-button:hover::after {
   background-color: #f7ad82;
 }
+
+
+#text {
+  position: absolute;
+  width: 40%;
+  
+  left: 30%;
+  margin-left: -225px;
+  height: 400px;
+  top: 46%;
+  margin-top: -20px;
+  font-size: 40px;
+  
+}
+
+p {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+}
+
+.word {
+  position: absolute;
+  
+  opacity: 0;
+}
+
+.letter {
+  display: inline-block;
+  position: relative;
+  float: left;
+  transform: translateZ(25px);
+  transform-origin: 50% 50% 25px;
+}
+
+.letter.out {
+  transform: rotateX(90deg);
+  transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.letter.behind {
+  transform: rotateX(-90deg);
+}
+
+.letter.in {
+  transform: rotateX(0deg);
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wisteria {
+  color: #8e44ad;
+}
+
+.belize {
+  color: #2980b9;
+}
+
+.pomegranate {
+  color: #c0392b;
+}
+
+.green {
+  color: #16a085;
+}
+
+.midnight {
+  color: #a543e6;
+}
+
+.blue {
+  color: #3e9af7;
+}
+
+.yellow {
+  color: #ffe46d;
+}
+
+@keyframes showTopText {
+  0% { transform: translate3d(0, 100%, 0); visibility: hidden; }
+  1% { visibility: visible; }
+  100% { transform: translate3d(0, 0, 0); visibility: visible; }
+}
+
+@keyframes showBottomText {
+  0% { transform: translate3d(0, -100%, 0); visibility: hidden; }
+  1% { visibility: visible; }
+  100% { transform: translate3d(0, 0, 0); visibility: visible; }
+}
+
+#animated-title {
+  color: #dddddd;
+  font-family: "Quicksand", sans-serif;
+  height: 20vmin;
+  left: 80%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vmin;
+}
+
+#animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: absolute;
+  width: 69%;
+}
+
+#animated-title > div div {
+  font-size: 6vmin;
+  padding: 1vmin 0;
+  position: absolute;
+  visibility: hidden;
+}
+
+#animated-title > div div span {
+  display: block;
+}
+
+#animated-title > div.text-top {
+  border-bottom: 0.5vmin solid #b9b8b8;
+  top: 0;
+}
+
+#animated-title > div.text-top div.animated {
+  animation: showTopText 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+
+#animated-title > div.text-top div span:first-child {
+  color: #767676;
+}
+
+#animated-title > div.text-bottom {
+  bottom: 0;
+}
+
+#animated-title > div.text-bottom div.animated {
+  animation: showBottomText 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+  top: 0;
+  transform: translate(0, -100%);
+}
+
+#animated-title a {
+  color: grey;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#animated-title a:hover {
+  color: white;
+}
+
+
+
+
+
+
 
 
 /* MEDIA QUERIES  */
@@ -772,16 +920,17 @@ INTRO 3 END */
     font-size:1.3em;
   }
   .about-text2  .big2-2 {
-    font-size: 0.7em;
-    line-height: 1em;
+    font-size: 0.6em;
+    
   }
   .about-text2  .normal2-1 {
-    font-size: 0.5em;
+    font-size: 0.4em;
     
   }
   .about-text2 .normal2-2 {
-    font-size: 0.45em;
-    padding-left: 32%;
+    font-size: 0.4em;
+    padding-left: 30%;
+    margin-right: 30px;
   }
 
 }
@@ -882,7 +1031,9 @@ INTRO 3 END */
 /* Mobile view */
 @media (max-width: 480px) {
   .about-text3 {
-    width: 45%;
+    width: 70%;
+    left: 5%;
+    top: 20%;
     }
     .about-text3 .big3-1 {
       font-size:1.2em; 

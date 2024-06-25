@@ -17,6 +17,7 @@ export default class Environment {
         this.initCameraPosition = new THREE.Vector3(50, 12, -3.5); // Desired camera position
         this.currentCameraPosition = new THREE.Vector3();
         this.intensitySet = false;
+        this.contactCamera = new THREE.Vector3(50, 24.5, -3.5); 
     }   
 
     setAmbientLightRoom1() {
@@ -44,6 +45,8 @@ export default class Environment {
             gsap.to(this.ambientLight, { intensity: 1.2, duration: 1 });
             this.intensitySet = true; 
         }
+
+        
     }
 
 }
