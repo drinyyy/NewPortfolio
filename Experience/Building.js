@@ -94,14 +94,14 @@ export default class Building {
         const geometryground = new THREE.BoxGeometry(20, 10, 50);
         this.materialground3 = new THREE.MeshBasicMaterial({ color: 0x1C3445 });
         this.ground3 = new THREE.Mesh(geometryground, this.materialground3);
-        this.ground3.position.set(-10, -7, -3);
+        this.ground3.position.set(-10, -7.3, -3);
         this.scene.add(this.ground3);
     }
     createGround2(){
-        const geometryground = new THREE.BoxGeometry( 25, 10, 50 ); 
+        const geometryground = new THREE.BoxGeometry( 25, 50, 50 ); 
     const materialground = new THREE.MeshBasicMaterial({ color: 0x132430 ,  });
     this.ground = new THREE.Mesh(geometryground, materialground);
-    this.ground.position.set(2,-8.3,-3)
+    this.ground.position.set(2,-28.5,-3)
     this.scene.add(this.ground)
     }
    

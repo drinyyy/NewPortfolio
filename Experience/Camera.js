@@ -40,10 +40,10 @@ export default class Camera {
             100
         );
     
-        this.orthographicCamera.position.set(20, 12, -3.6);
+        this.orthographicCamera.position.set(20, 10, -3.6);  
         this.orthographicCamera.rotation.set(Math.PI, Math.PI / 2, -Math.PI);
         this.scene.add(this.orthographicCamera);
-    
+        // final y axis should be 10
         // Store initial frustum size and aspect ratio
         
     
