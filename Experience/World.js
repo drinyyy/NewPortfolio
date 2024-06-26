@@ -45,7 +45,9 @@ export default class World {
         });
 
     }
-
+    getBuilding() {
+        return this.building;  // Assumes 'building' is the instance of Building class you want to access
+    }
 resize() {}
 
     update() {

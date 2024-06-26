@@ -39,21 +39,22 @@ export default class Camera {
             0.1,
             100
         );
-    
-        this.orthographicCamera.position.set(20, 10, -3.6);  
+        
+        // Initial Camera Position and Fustrum
+        this.orthographicCamera.position.set(20, 10, -3.6);     
         this.orthographicCamera.rotation.set(Math.PI, Math.PI / 2, -Math.PI);
         this.scene.add(this.orthographicCamera);
         // final y axis should be 10
-        // Store initial frustum size and aspect ratio
+       
         
     
-        console.log("Portrait initial orthographic camera frustum:", {
-            left: this.orthographicCamera.left,
-            right: this.orthographicCamera.right,
-            top: this.orthographicCamera.top,
-            bottom: this.orthographicCamera.bottom,
-            aspect: this.aspect
-        });
+        // console.log("Portrait initial orthographic camera frustum:", {
+        //     left: this.orthographicCamera.left,
+        //     right: this.orthographicCamera.right,
+        //     top: this.orthographicCamera.top,
+        //     bottom: this.orthographicCamera.bottom,
+        //     aspect: this.aspect
+        // });
     }
     
     
@@ -196,7 +197,7 @@ export default class Camera {
 
     isCameraAtAboutMenuItem() {
         const aboutMenuPosition = new THREE.Vector3(50, 12, -3.5); // "about-menu-item" camera position
-        return this.camera.position.equals(aboutMenuPosition); // Strict equality check for position
+        return this.camera.position.equals(aboutMenuPosition); 
     }
 
     

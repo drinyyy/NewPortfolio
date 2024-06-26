@@ -178,7 +178,7 @@ export default class Sign {
             item.classList.remove('show');
         });
         this.currentlyVisibleIndex = null;
-        console.log('All project items hidden');
+        
     }
 
     setupMenu() {
@@ -187,20 +187,20 @@ export default class Sign {
 
         if (aboutMenuItem) {
             aboutMenuItem.addEventListener('click', () => {
-                console.log('About menu item clicked');
+                
                 this.hideAllProjectItems();
             });
         } else {
-            console.error('About menu item not found');
+            
         }
 
         if (contactMenuItem) {
             contactMenuItem.addEventListener('click', () => {
-                console.log('Contact menu item clicked');
+               
                 this.hideAllProjectItems();
             });
         } else {
-            console.error('Contact menu item not found');
+            
         }
     }
 

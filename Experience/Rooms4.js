@@ -61,7 +61,7 @@ export default class Rooms4 {
             child.material = new THREE.MeshStandardMaterial({ color:  0x000000 });
             this.rotateShoes(child);
             child.position.set(1.84, 1.26, -5.43); // Set the position for avaturn_shoes_0004
-            console.log(child.position)
+            
         }
         
             

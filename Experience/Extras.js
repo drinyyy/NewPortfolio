@@ -95,7 +95,7 @@ export default class Extras {
       
         this.scene.add(this.actualExtras3);
         
-        console.log(this.actualExtras3)
+       
     }
     
     setModel8() {
